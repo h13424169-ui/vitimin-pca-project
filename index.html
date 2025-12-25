@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitamin PCA Analysis Report</title>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { background-color: #f8f9fa; padding: 40px 20px; text-align: center; border-bottom: 3px solid #ff9800; }
+        h1 { margin: 0; color: #d35400; }
+        h2 { border-left: 5px solid #d35400; padding-left: 10px; margin-top: 40px; }
+        .intro { font-size: 1.1em; color: #555; }
+        .img-container { text-align: center; margin: 20px 0; }
+        img { max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .code-box { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; font-size: 0.8em; color: #777; border-top: 1px solid #eee; }
+        .btn { display: inline-block; background: #333; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>종합비타민 성분 비교 분석 리포트</h1>
+        <p>PCA(주성분 분석) 기법을 활용한 시판 제품의 포지셔닝 맵 구축</p>
+    </header>
+
+    <section>
+        <h2>1. 탐구 개요 (Introduction)</h2>
+        <p class="intro">
+            본 프로젝트는 시중에서 판매되는 10종의 종합비타민 제품의 영양 성분 데이터를 수집하고,
+            <strong>주성분 분석(PCA)</strong> 기법을 적용하여 제품 간의 상관관계와 성분 배합의 경향성을 수학적으로 규명한 연구입니다.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. 분석 방법 (Methodology)</h2>
+        <p>파이썬(Python)의 Scikit-learn 라이브러리를 사용하여 8차원의 영양소 데이터를 2차원으로 축소하였습니다. 사용된 주요 코드는 다음과 같습니다.</p>
+        
+        <div class="code-box">
+<pre>
+# PCA 분석 핵심 코드
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+x_scaled = StandardScaler().fit_transform(x)
+pca = PCA(n_components=2)
+principalComponents = pca.fit_transform(x_scaled)
+</pre>
+        </div>
+        <p>전체 코드는 <a href="analysis.py" target="_blank">여기(analysis.py)</a>에서 확인할 수 있습니다.</p>
+    </section>
+
+    <section>
+        <h2>3. 분석 결과 (Results)</h2>
+        
+        <h3>Figure 1. PCA Biplot Analysis</h3>
+        <p>제품의 분포(점)와 영양 성분의 기여도(화살표)를 동시에 시각화한 결과입니다.</p>
+        <div class="img-container">
+            <img src="biplot.png" alt="PCA Biplot 결과 그래프">
+        </div>
+        <p>
+            분석 결과, <strong>PC1(가로축)</strong>은 '비타민 B/C의 함량 강도'를, 
+            <strong>PC2(세로축)</strong>는 '비타민 A vs 아연의 배합 성향'을 나타내는 것으로 확인되었습니다.
+        </p>
+
+        <h3>Figure 2. Loading Heatmap</h3>
+        <div class="img-container">
+            <img src="heatmap.png" alt="Loading Heatmap 결과">
+        </div>
+    </section>
+
+    <section>
+        <h2>4. 결론 (Conclusion)</h2>
+        <p>
+            본 연구를 통해 시판 비타민 제품은 무작위로 설계되는 것이 아니라, 
+            <strong>'고함량 활력 부스팅'</strong>과 <strong>'기초 영양 밸런스'</strong>라는 
+            두 가지 뚜렷한 설계 철학으로 구분됨을 데이터로 입증하였습니다.
+        </p>
+    </section>
+
+    <footer>
+        <p>Research by [woonsungJo] | Powered by Python & GitHub</p>
+    </footer>
+
+</body>
+</html>
